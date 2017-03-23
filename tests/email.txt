@@ -1,0 +1,39 @@
+MIME-Version: 1.0
+Received: by 10.31.133.67 with HTTP; Wed, 22 Mar 2017 23:08:39 -0700 (PDT)
+Date: Thu, 23 Mar 2017 02:08:39 -0400
+Delivered-To: mtkennerly@gmail.com
+Message-ID: <CAKqNo6RNruogrP2S2tXNCETVsh13CBT_KmGChbGd2Nwdkr-6bA@mail.gmail.com>
+Subject: Testing
+From: Matthew Timothy Kennerly <mtkennerly@gmail.com>
+To: mtkennerly@gmail.com
+Content-Type: multipart/mixed; boundary=001a1142e19e4b7133054b5fb56d
+
+--001a1142e19e4b7133054b5fb56d
+Content-Type: multipart/alternative; boundary=001a1142e19e4b712e054b5fb56b
+
+--001a1142e19e4b712e054b5fb56b
+Content-Type: text/plain; charset=UTF-8
+
+This is a test message.
+
+--001a1142e19e4b712e054b5fb56b
+Content-Type: text/html; charset=UTF-8
+
+<div dir="ltr">This is a test message.</div>
+
+--001a1142e19e4b712e054b5fb56b--
+--001a1142e19e4b7133054b5fb56d
+Content-Type: text/plain; charset=US-ASCII; name="foo.txt"
+Content-Disposition: attachment; filename="foo.txt"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_j0lzydsp0
+
+Zm9v
+--001a1142e19e4b7133054b5fb56d
+Content-Type: text/plain; charset=US-ASCII; name="bar.txt"
+Content-Disposition: attachment; filename="bar.txt"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_j0lzydsu1
+
+YmFy
+--001a1142e19e4b7133054b5fb56d--
