@@ -27,10 +27,10 @@ setup(
     keywords="email attachment",
     py_modules=["clingy"],
     extras_require={
-        "test": [
-            "pytest",
-            'mock;python_version<"3.0"'
-        ],
+        "dev": [
+            "invoke",
+            "tox"
+        ]
     },
     entry_points={
         "console_scripts": [
