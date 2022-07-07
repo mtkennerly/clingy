@@ -26,12 +26,6 @@ setup(
     ],
     keywords="email attachment",
     py_modules=["clingy"],
-    extras_require={
-        "dev": [
-            "invoke",
-            "tox"
-        ]
-    },
     entry_points={
         "console_scripts": [
             "clingy=clingy:main",

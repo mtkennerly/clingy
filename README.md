@@ -1,3 +1,4 @@
+# Clingy
 Clingy lets you save attachments from plain text emails.
 
 From the command line, you can use it like this:
