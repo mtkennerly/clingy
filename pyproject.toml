@@ -5,7 +5,7 @@ description = "A tool to save attachments from plain text emails"
 license = "MIT"
 authors = ["Matthew T. Kennerly <mtkennerly@gmail.com>"]
 readme = "README.md"
-repository = "https://github.com/mtkennerly/tkup"
+repository = "https://github.com/mtkennerly/clingy"
 keywords = ["email", "attachment"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
