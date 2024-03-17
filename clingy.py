@@ -1,4 +1,3 @@
-
 import argparse
 import email
 from email.message import Message
@@ -8,28 +7,33 @@ import re
 
 
 def _parse_args(argv=None):
-    parser = argparse.ArgumentParser(
-        description="Save attachments from plain text email files."
+    parser = argparse.ArgumentParser(description="Save attachments from plain text email files.")
+
+    parser.add_argument(
+        "filenames", type=str, nargs="+", help="filenames of emails from which to save attachments"
     )
 
     parser.add_argument(
-        "filenames", type=str, nargs="+",
-        help="filenames of emails from which to save attachments"
+        "-d",
+        "--directory",
+        dest="directory",
+        help="directory for saving (default is working directory)",
     )
 
     parser.add_argument(
-        "-d", "--directory", dest="directory",
-        help="directory for saving (default is working directory)"
+        "-g",
+        "--glob",
+        dest="glob",
+        metavar="PATTERN",
+        help="glob pattern to filter attachments by name",
     )
 
     parser.add_argument(
-        "-g", "--glob", dest="glob", metavar="PATTERN",
-        help="glob pattern to filter attachments by name"
-    )
-
-    parser.add_argument(
-        "-r", "--regex", dest="regex", metavar="PATTERN",
-        help="regular expression to filter attachments by name"
+        "-r",
+        "--regex",
+        dest="regex",
+        metavar="PATTERN",
+        help="regular expression to filter attachments by name",
     )
 
     return parser.parse_args(argv)

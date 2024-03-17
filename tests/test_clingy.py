@@ -1,15 +1,12 @@
-
-import six
-try:
-    from unittest import mock
-except ImportError:
-    import mock
+from pathlib import Path
+from unittest import mock
 
 import pytest
 
 import clingy
 
-builtins_name = six.moves.builtins.__name__
+REPO = Path(__file__).parent.parent
+EMAIL = REPO / "tests" / "email.txt"
 
 
 def test__parse_args_need_at_least_one_filename():
@@ -61,18 +58,18 @@ def test__parse_args_regex_short():
     argv = ["email.txt", "-r", r"\.txt$"]
     args = clingy._parse_args(argv)
     assert args.filenames == ["email.txt"]
-    assert args.regex == "\.txt$"
+    assert args.regex == r"\.txt$"
 
 
 def test__parse_args_regex_long():
     argv = ["email.txt", "--regex", r"\.txt$"]
     args = clingy._parse_args(argv)
     assert args.filenames == ["email.txt"]
-    assert args.regex == "\.txt$"
+    assert args.regex == r"\.txt$"
 
 
 def test_find_with_filename():
-    attachments = clingy.find("email.txt")
+    attachments = clingy.find(EMAIL)
 
     assert len(attachments) == 2
     assert attachments[0].get_filename() == "foo.txt"
@@ -80,22 +77,22 @@ def test_find_with_filename():
 
 
 def test_find_with_glob():
-    attachments = clingy.find("email.txt", glob="foo*")
+    attachments = clingy.find(EMAIL, glob="foo*")
 
     assert len(attachments) == 1
     assert attachments[0].get_filename() == "foo.txt"
 
 
 def test_find_with_regex():
-    attachments = clingy.find("email.txt", regex=r"^foo")
+    attachments = clingy.find(EMAIL, regex=r"^foo")
 
     assert len(attachments) == 1
     assert attachments[0].get_filename() == "foo.txt"
 
 
 def test_find_with_string():
-    with open("email.txt") as file:
-        attachments = clingy.find(file.read())
+    email = EMAIL.read_text()
+    attachments = clingy.find(email)
 
     assert len(attachments) == 2
     assert attachments[0].get_filename() == "foo.txt"
@@ -123,11 +120,10 @@ def test_match_both():
 
 
 def test_save_with_filename():
-    with open("email.txt") as file:
-        email = file.read()
+    email = EMAIL.read_text()
 
     mo = mock.mock_open(read_data=email)
-    with mock.patch("{}.open".format(builtins_name), mo):
+    with mock.patch("builtins.open", mo):
         clingy.save(email)
 
     # Output filenames
@@ -141,11 +137,10 @@ def test_save_with_filename():
 
 
 def test_save_with_glob():
-    with open("email.txt") as file:
-        email = file.read()
+    email = EMAIL.read_text()
 
     mo = mock.mock_open()
-    with mock.patch("{}.open".format(builtins_name), mo):
+    with mock.patch("builtins.open", mo):
         clingy.save(email, glob="bar*")
 
     # Output filenames
@@ -157,10 +152,10 @@ def test_save_with_glob():
 
 
 def test_save_with_message_object():
-    attachments = clingy.find("email.txt")
+    attachments = clingy.find(EMAIL)
 
     mo = mock.mock_open()
-    with mock.patch("{}.open".format(builtins_name), mo):
+    with mock.patch("builtins.open", mo):
         clingy.save(attachments[0])
 
     # Output filenames
@@ -172,11 +167,10 @@ def test_save_with_message_object():
 
 
 def test_save_with_regex():
-    with open("email.txt") as file:
-        email = file.read()
+    email = EMAIL.read_text()
 
     mo = mock.mock_open()
-    with mock.patch("{}.open".format(builtins_name), mo):
+    with mock.patch("builtins.open", mo):
         clingy.save(email, glob="bar*")
 
     # Output filenames
@@ -188,11 +182,10 @@ def test_save_with_regex():
 
 
 def test_save_with_string():
-    with open("email.txt") as file:
-        email = file.read()
+    email = EMAIL.read_text()
 
     mo = mock.mock_open()
-    with mock.patch("{}.open".format(builtins_name), mo):
+    with mock.patch("builtins.open", mo):
         clingy.save(email)
 
     # Output filenames

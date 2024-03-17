@@ -1,5 +1,0 @@
-invoke
-mock; python_version < '3.0'
-pytest
-six
-wheel
